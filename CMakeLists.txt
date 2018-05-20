@@ -14,6 +14,9 @@
 
 cmake_minimum_required ( VERSION 2.8.12 )
 project ( external_v8 NONE )
+set ( ${PROJECT_NAME}_STATICLIB_VERSION 6.7.288.32-1 )
+set ( ${PROJECT_NAME}_DESCRIPTION "V8 library build for Staticlibs" )
+set ( ${PROJECT_NAME}_URL https://github.com/staticlibs/external_v8 )
 
 # standalone build
 if ( NOT DEFINED STATICLIB_TOOLCHAIN )
@@ -38,6 +41,11 @@ endif ( )
 
 if ( NOT ${PROJECT_NAME}_TOOLCHAIN MATCHES "linux_amd64_gcc" )
     message ( FATAL_ERROR "Unsupported toolchain: [${${PROJECT_NAME}_TOOLCHAIN}]" )
+endif ( )
+
+# standalone build
+if ( NOT DEFINED CMAKE_LIBRARY_OUTPUT_DIRECTORY )
+    set ( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR} )
 endif ( )
 
 # copy prebuilt libs
